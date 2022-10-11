@@ -1,0 +1,2 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/select2/dist/css/select2.min.css">
