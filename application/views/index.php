@@ -13,8 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/font-awesome/css/font-awesome.min.css">
-      
-     
+
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/Ionicons/css/ionicons.min.css">
         <!-- DataTables -->
@@ -24,8 +24,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/dist/css/skins/_all-skins.min.css">
-       
-        <?php 
+
+        <?php
             $this->load->view($load.'/css');
         ?>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -135,7 +135,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header">Danh sách menu</li>
+					<?php $id = $this->session->userdata('login')[0]['id']; ?>
+					<?php if ($this->session->userdata('login')[0]['group_id'] == 0) : ?>
+						<li class="header">Danh sách menu</li>
 						<!-- Optionally, you can add icons to the links -->
                         <li class="treeview">
                                 <a href="#">
@@ -161,17 +163,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                  </span>
                              </a>
                              <ul class="treeview-menu">
+                                    <li><a href="<?php echo base_url("Required"); ?>"><i class="fa fa-circle-o"></i> <span>Danh sách giấy biên nhận</span></a></li>
+                                    <li><a href="<?php echo base_url("Required/Create"); ?>"><i class="fa fa-circle-o"></i> <span>Tạo giấy biên nhận</span></a></li>
+                             </ul>
+                        </li>
+						<li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                <span>Quản lý chuyển mẫu</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                                 </span>
+                             </a>
+                             <ul class="treeview-menu">
+							 	<li><a href="<?php echo base_url("Transfer"); ?>"><i class="fa fa-share"></i> <span>Danh sách giấy chuyển mẫu</span></a></li>
+                        		<li><a href="<?php echo base_url("Result"); ?>"><i class="fa fa-book"></i> <span>Danh sách giấy trả kết quả</span></a></li>
+                             </ul>
+                        </li>
+
+
+
+
+					<?php elseif ($this->session->userdata('login')[0]['group_id'] == 1) : ?>
+						<li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                <span>Quản lý giấy biên nhận</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                                 </span>
+                             </a>
+                             <ul class="treeview-menu">
                                         <li><a href="<?php echo base_url("Required"); ?>"><i class="fa fa-circle-o"></i> <span>Danh sách giấy biên nhận</span></a></li>
                                     <li><a href="<?php echo base_url("Required/Create"); ?>"><i class="fa fa-circle-o"></i> <span>Tạo giấy biên nhận</span></a></li>
                              </ul>
                         </li>
-						
-                      
-                        <li><a href="<?php echo base_url("Transfer"); ?>"><i class="fa fa-share"></i> <span>Danh sách giấy chuyển mẫu</span></a></li>
-                        <li><a href="<?php echo base_url("Result"); ?>"><i class="fa fa-book"></i> <span>Danh sách giấy trả kết quả</span></a></li>
-                            <?php $id = $this->session->userdata('login')[0]['id']; ?>
-                       
-                     
+					<?php else : ?>
+						<li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                <span>Quản lý chuyển mẫu</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                                 </span>
+                             </a>
+                             <ul class="treeview-menu">
+							 	<li><a href="<?php echo base_url("Transfer"); ?>"><i class="fa fa-share"></i> <span>Danh sách giấy chuyển mẫu</span></a></li>
+                        		<li><a href="<?php echo base_url("Result"); ?>"><i class="fa fa-book"></i> <span>Danh sách giấy trả kết quả</span></a></li>
+                             </ul>
+                        </li>
+					<?php endif; ?>
+
+
+
+
+
 
                     </ul>
                     <!-- /.sidebar-menu -->
@@ -205,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="<?php echo base_url(); ?>asserts/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="<?php echo base_url(); ?>asserts/bower_components/jquery-ui/jquery-ui.min.js"></script>
-      
+
         <!-- SlimScroll -->
         <script src="<?php echo base_url(); ?>asserts/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
         <!-- FastClick -->
@@ -218,18 +264,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <script src="<?php echo base_url(); ?>asserts/dist/js/datatable.js"></script>
         <script src="<?php echo base_url(); ?>asserts/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-      
-        <?php 
+
+        <?php
             $this->load->view($load.'/ajax');
         ?>
-        
+
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
-      
+
        <?php if(isset($ajax)){
            $this->load->view('admin/menu/ajax');
        } ?>
 
-       
+
     </body>
 </html>
