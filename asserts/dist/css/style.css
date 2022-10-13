@@ -1,0 +1,12 @@
+.table th {
+	background: #3c8dbc;
+    color: #fff;
+	text-align: center;
+}
+.table td {
+	border: 1px solid #3c8dbc !important;
+	border-right: none;
+}
+.table td .fa {
+	font-size: 16px
+}

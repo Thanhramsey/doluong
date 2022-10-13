@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>asserts/dist/css/style.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>asserts/dist/css/skins/_all-skins.min.css">

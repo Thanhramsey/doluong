@@ -19,8 +19,8 @@ class Required extends CI_Controller {
         $this->load->model("model");
         $this->load->library("session");
         $this->load->library('form_validation');
-     
-     
+
+
     }
 
     public function index() {
@@ -28,15 +28,15 @@ class Required extends CI_Controller {
             redirect(base_url('Home/login'));
         } else {
                 $login = $this->session->userdata('login');
-               
-               
+
+
                 if($this->model->checkpermission($this::$permission,$login)==true){
                     $data['load'] = $this::$namecontroller;
                     $search = [];
                     $id = $this->input->post('id');
                     $name = $this->input->post('name');
                     $mst =  $this->input->post('mst');
-                  
+
                    // $data['list'] = $this->model->getList("mauthunghiem",$search,'desc');
                     $data['title_page'] = "Danh sách ".self::$title;
                     $data['controllername'] = $this::$namecontroller;
@@ -48,22 +48,22 @@ class Required extends CI_Controller {
         }
     }
 
-    
+
     public function index_ajax($offset=null)
 	{
             $search = array(
                 'name' => trim($this->input->post('name')),
                 'id' => trim($this->input->post('id')),
                 'mst' => trim($this->input->post('mst'))
-                  
+
             );
-     
+
             $this->load->library('pagination');
-         
+
             $limit = 5;
-      
+
             //$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-      
+
             $config['base_url'] = site_url($this::$namecontroller.'/index_ajax/');
             $config['total_rows'] = $this->model->get_list($limit, $offset, $search, $count=true,"mauthunghiem");
             $config['per_page'] = $limit;
@@ -85,11 +85,11 @@ class Required extends CI_Controller {
             $config['last_link'] = 'Last';
             $config['last_tag_open'] = '<li>';
             $config['last_tag_close'] = '</li>';
-            
+
             $this->pagination->initialize($config);
 
             $data['list'] = $this->model->get_list($limit, $offset, $search, $count=false,"mauthunghiem");
-   
+
             $data['pagelinks'] = $this->pagination->create_links();
             $data['controllername'] = $this::$namecontroller;
             $this->load->view($this::$namecontroller.'/list_ajax', $data);
@@ -164,7 +164,7 @@ class Required extends CI_Controller {
                 $data['title_page'] = "Xem ".self::$title;
                // $data['template_content'] = $this::$namecontroller.'/nhapmau';
                 $array = array(
-                    'mathunghiem' => $id 
+                    'mathunghiem' => $id
                 );
                 $data['list'] = $this->model->getList('tenmau',$array,'asc');
                 $data['categorys'] = $this->model->getData('category');
@@ -177,10 +177,10 @@ class Required extends CI_Controller {
                 $this->form_validation->set_rules('phone', 'Điện thoại', 'trim');
                 $this->form_validation->set_rules('fax', 'fax', 'trim');
                 $this->form_validation->set_rules('email', 'email', 'trim');
-            
+
                 $data['info'] = $this->model->getInfo($id, $this::$table);
                 $data['listmau'] = $this->model->getList('mauchitieu',[],'asc');
-            
+
                 if ($this->form_validation->run() == true) {
                     $start = explode("/",$this->input->post('date'));
 
@@ -229,7 +229,7 @@ class Required extends CI_Controller {
         } else {
             $login = $this->session->userdata('login');
             if($this->model->checkpermission($this::$permission,$login)==true){
-               
+
                     $update = array(
                        'status'=>1,
                        'nguoichuyenmau'=>$login[0]['fullname']
@@ -255,7 +255,7 @@ class Required extends CI_Controller {
                 $data['title_page'] = "Xem ".self::$title;
                 $data['template_content'] = $this::$namecontroller.'/nhapmau';
                 $array = array(
-                    'mathunghiem' => $id 
+                    'mathunghiem' => $id
                 );
                 $data['list'] = $this->model->getList('tenmau',$array,'desc');
                 $data['categorys'] = $this->model->getData('category');
@@ -277,13 +277,13 @@ class Required extends CI_Controller {
         $code = 'M'.$macode.'.'.$stt.'.'.date("Y");
         $this->model->savetenmau($id,$name,$method,$statusmau,$mass,$code);
         $array = array(
-            'mathunghiem' => $id 
+            'mathunghiem' => $id
         );
         $data = $this->model->getList('tenmau',$array,'asc');
         echo json_encode($data);
     }
 
-    
+
     public function Editmau(){
         $id = $this->input->post('id');
         $name= $this->input->post('name');
@@ -309,7 +309,7 @@ class Required extends CI_Controller {
         $this->model->del('tenmau', $id);
         $this->model->delchitieu('chitieu', $id,'tenmau');
         $array = array(
-            'mathunghiem' => $idmau 
+            'mathunghiem' => $idmau
         );
         $data= $this->model->getList('tenmau',$array,'desc');
         echo json_encode($data);
@@ -317,9 +317,9 @@ class Required extends CI_Controller {
 
     public function loadchitieu(){
         $id = $this->input->post('id');
-      
+
         $array = array(
-            'tenmau' => $id 
+            'tenmau' => $id
         );
 
         $data = $this->model->getList('chitieu',$array,'desc');
@@ -328,9 +328,9 @@ class Required extends CI_Controller {
 
     public function loaddetailchitieu(){
         $id = $this->input->post('id');
-        
+
         $array = array(
-            'category' => $id 
+            'category' => $id
         );
         $data = $this->model->getList('method',$array,'desc');
         echo json_encode($data);
@@ -352,7 +352,7 @@ class Required extends CI_Controller {
         //}
         $this->model->savechitieu($id,$info['name'],$info['mass'],$info['price'],$info['method'],$info['note'],$info['id']);
         $array = array(
-            'tenmau' => $id 
+            'tenmau' => $id
         );
         $data = $this->model->getList('chitieu',$array,'asc');
         echo json_encode($data);
@@ -363,7 +363,7 @@ class Required extends CI_Controller {
         $tenmau = $this->input->post('tenmau');
         $dschitieu = $this->input->post('dschitiet');
         $this->model->savechitieumau($tenmau,$dschitieu);
-    
+
         $data = $this->model->getList('mauchitieu',[],'asc');
         echo json_encode($data);
 
@@ -377,7 +377,7 @@ class Required extends CI_Controller {
         $dsmauthuongdung = $this->model->getList('mauchitietchitieu',$array,'asc');
         $this->model->savedsmau($id,$dsmauthuongdung);
         $array1 = array(
-            'tenmau' => $id 
+            'tenmau' => $id
         );
         $data = $this->model->getList('chitieu',$array1,'desc');
         echo json_encode($data);
@@ -388,7 +388,7 @@ class Required extends CI_Controller {
         $tongtienchitieu = $this->input->post('tongtienchitieu');
         $chitieu = $this->input->post('listchitiet');
         $biennhan = $this->input->post('listbiennhan');
-       
+
         $update = array(
             'chitieu' => $chitieu,
             'sum' => $tongtienchitieu,
@@ -402,7 +402,7 @@ class Required extends CI_Controller {
         $id = $this->input->post('id');
         $idmau= $this->input->post('idmau');
         $array = array(
-            'tenmau' => $idmau 
+            'tenmau' => $idmau
         );
         $this->model->del('chitieu', $id);
         $data = $this->model->getList('chitieu',$array,'desc');
@@ -432,7 +432,7 @@ class Required extends CI_Controller {
                 $data['template_content'] = $this::$namecontroller.'/ketqua';
                 $data['title_page'] = "Chỉnh sửa ".self::$title;
                 $data['controllername'] = $this::$namecontroller;
-            
+
                 $data['info'] = $this->model->getInfo($id, $this::$table);
                 $this->form_validation->set_rules('ketluan', 'Kết luận', 'trim|required');
                 if ($this->form_validation->run() == true) {
@@ -454,10 +454,10 @@ class Required extends CI_Controller {
                         'ngaydukien'=>date("Y-m-d",strtotime($ngaydukiens)),
                     );
                     $this->model->update("mauthunghiem", $update,$id);
-                  
+
                     redirect(base_url($this::$namecontroller.'/edit/'.$id));
                 }
-        
+
                $this->load->view("index", $data);
             } else {
                 redirect(base_url());
@@ -475,7 +475,7 @@ class Required extends CI_Controller {
         $this->load->view($data['template_content'], $data);
     }
 
-   
+
     //Search chỉ tiêu
     public function Search(){
         $search = [];

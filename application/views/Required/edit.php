@@ -15,7 +15,6 @@
     <div class="col-xl-12">
         <div class="box">
             <div class="box-body">
-
                 <form role="form" method="post" action="<?php echo base_url($controllername."/edit/".$info["id"]); ?>" enctype="multipart/form-data">
                 <div class="box-body row">
 					     <div class="col-lg-6 col-lg-12">
@@ -31,7 +30,7 @@
                             <label for="exampleInputUsername">Tên đơn vị yêu cầu<span style="color:#EA3838">(*)<?php echo form_error('com'); ?></span></label>
                             <input type="text" class="form-control" id="exampleInputUsername" name="com" placeholder="Nhập tên  đơn vị yêu cầu" value="<?php echo $info['com']; ?>">
                         </div>
-                     
+
                         <div class="col-lg-6 col-lg-12">
                             <label for="exampleInputUsername">Địa chỉ</span></label>
                             <input type="text" class="form-control" id="exampleInputUsername" name="address" placeholder="Nhập địa chỉ" value="<?php echo $info['address']; ?>">
@@ -114,7 +113,7 @@
                                         <option value="0.5kg/M">0.5kg/M</option>
                                         <option value="1.0kg/M">1.0kg/M</option>
                                     </select>-->
-                                
+
                                 </div>
                                 <div class="col-lg-2">
                                     <label></label></br>
@@ -159,9 +158,9 @@
                                                 <tr>
                                                     <td><?php echo $stt; ?></td>
                                                     <td>
-                                                    
+
                                                     <input class="form-control" type="text" name='phi' id="name<?php echo $item['id'];?>" value="<?php echo $item['name']; ?>" placeholder='Nhập tên mẫu'/>
-                                                    
+
                                                     </td>
                                                     <td id="phi<?php echo $item['id'];?>">
                                                         <?php echo $item['chitieu']; ?>
@@ -174,18 +173,18 @@
                                                     </td>
                                                     <td>
                                                     <input class="form-control" type="text" id="mass<?php echo $item['id'];?>" value="<?php echo $item['mass']; ?>" placeholder='Nhập tên mẫu'/>
-                                                    
+
                                                     </td>
                                                     <td>
                                                     <input class="form-control" type="text" name='phi' id="code<?php echo $item['id'];?>" value="<?php echo $item['code']; ?>" placeholder='Nhập tên mẫu'/>
-                                                    
+
                                                     </td>
                                                 <!--<td id="sum<?php// echo $item['id'];?>"><?php// echo $item['sum']; ?></td>
                                                     //<?php// $all=$all+$item['sum'];?>-->
                                                     <td>
                                                     <button class='btn btn-sm btn-primary btn-xs' data-toggle='modal' data-target='#myModal-criteria' onclick='LoadChitieu(<?php echo $item["id"];?>)'><i class='fa fa-plus'></i>Chỉ tiêu</button></br>
                                                         <button class="btn btn-danger btn-xs" onclick="EditMau(<?php echo $item['id'];?>,<?php echo $id;?>)"><i class="fa fa-plus" aria-hidden="true"></i>Luu</button></br>
-                                                  
+
                                                         <button class="btn btn-danger btn-xs" onclick="Delete(<?php echo $item['id'];?>,<?php echo $id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i> Xóa</button>
                                                     </td>
                                                 </tr>
@@ -194,50 +193,51 @@
                                     }
                                     ?>
                                             </tr>
-                                        
+
                                             <tr>
-                                                <td colspan="6" style="text-align: right;">Tổng cộng:</td>
-                                                <td> <input class="form-control" type="text" name="method" id="method" value="<?php echo $info['sum']; ?>" placeholder="Nhập tên mẫu"/></td>
+                                                <td colspan="6" style="text-align: left;">Tổng cộng:</td>
+                                                <td> <input class="form-control" type="text" name="method" id="sotien" value="<?php echo $item['sum']; ?>" placeholder="Nhập tên mẫu"/></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="6" style="text-align: left;">Số tiền viết bằng chữ:</td>
+                                                <td><input class="form-control" type="text" name="method" id="method_sotienchu"  value="<?php echo $item['sum']; ?>" placeholder="Nhập tên mẫu"/></td>
                                                 <td></td>
-                                                <td></td>
-                                            
+
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
 
-                             
+
                     </div>
                     <!-- /.box-header -->
-                   
-   
-                   
+
+
+
             </div>
-   
+
     </div>
-   
+
     <div class="col-xl-12">
         <div class="box">
             <div class="box-body row">
                 <form role="form" method="post" action="<?php echo base_url($controllername."/addketqua/".$info["id"]); ?>" enctype="multipart/form-data">
+						<div class="col-lg-12">
+									<div class="row">
+										<div class="col-lg-12 col-lg-12">
+											<label>Số tiền tạm ứng</label>
+											<input onchange="tinhTien()" id="tratruoc" type="text" class="form-control" name="khachhangtratruoc" placeholder="Nhập tên tiêu chuẩn/yêu cầu quy định" value="<?php echo $info['khachhangtratruoc']; ?>">
+										</div>
+
+									</div>
+						</div>
                         <div class="col-lg-12 col-lg-12">
                             <label for="exampleInputUsername">Tổng số tiền cần thanh toán</span></label>
                             <input type="text" class="form-control" id="sum" name="sum" placeholder="Tổng số tiền khách cần thanh toán" value="<?php echo $info['sum']; ?>">
                         </div>
-                        
-                    <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-12 col-lg-12">
-                                    <label>Số tiền tạm ứng</label>
-                                    <input type="text" class="form-control" name="khachhangtratruoc" placeholder="Nhập tên tiêu chuẩn/yêu cầu quy định" value="<?php echo $info['khachhangtratruoc']; ?>">      
-                                </div>
-                            
-                            </div>
-                    </div>
+
+
                     <div class="clearfix"></div>
                     <div class="col-lg-12">
                             <div class="row">
@@ -259,7 +259,7 @@
                                 </div>
                                 <div class="col-lg-6 col-lg-12">
                                      <label>Tên tiêu chuẩn/yêu cầu quy định</label>
-                                     <input type="text" class="form-control" name="tentieuchuan" placeholder="Nhập tên tiêu chuẩn/yêu cầu quy định" value="<?php echo $info['tentieuchuan']; ?>">   
+                                     <input type="text" class="form-control" name="tentieuchuan" placeholder="Nhập tên tiêu chuẩn/yêu cầu quy định" value="<?php echo $info['tentieuchuan']; ?>">
                                 </div>
                             </div>
                     </div>
@@ -269,11 +269,11 @@
                                 <div class="col-lg-4 col-lg-12">
                                     <label>Ngày trả kết quả</label>
                                     <?php $ngaytraketqua = ($info['ngaytraketqua']=='0000-00-00')?date("d/m/Y"):date("d/m/Y", strtotime($info['ngaytraketqua'])); ?>
-                                    <input type="text" class="form-control timepicker" id="exampleInputUsername" name="ngaytraketqua" placeholder="Nhập ngày trả kết quả" value="<?php echo $ngaytraketqua; ?>">  
+                                    <input type="text" class="form-control timepicker" id="exampleInputUsername" name="ngaytraketqua" placeholder="Nhập ngày trả kết quả" value="<?php echo $ngaytraketqua; ?>">
                                 </div>
                                 <div class="col-lg-4 col-lg-12">
                                      <label>Số bản KQ</label>
-                                     <input type="text" class="form-control" name="sobankq" placeholder="Nhập số bản kết quả" value="<?php echo $info['sobankq']; ?>">   
+                                     <input type="text" class="form-control" name="sobankq" placeholder="Nhập số bản kết quả" value="<?php echo $info['sobankq']; ?>">
                                 </div>
                                 <div class="col-lg-4 col-lg-12">
                                      <label>Nhận kết quả tại</label>
@@ -315,10 +315,10 @@
                                 <div class="col-lg-4 col-lg-12">
                                     <label>Ngày dự kiến trả KQ</label>
                                     <?php $ngaydukien= ($info['ngaydukien']=='0000-00-00')?date("d/m/Y"):date("d/m/Y", strtotime($info['ngaydukien'])); ?>
-                                    <input type="text" class="form-control timepicker" id="exampleInputUsername" name="ngaydukien" placeholder="Nhập ngày trả kết quả" value="<?php echo $ngaydukien; ?>">  
+                                    <input type="text" class="form-control timepicker" id="exampleInputUsername" name="ngaydukien" placeholder="Nhập ngày trả kết quả" value="<?php echo $ngaydukien; ?>">
                                 </div>
-                              
-                               
+
+
                             </div>
                     </div>
                     <!-- /.box-body -->
@@ -326,9 +326,9 @@
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Lưu trữ</button>
                         <a class="btn btn-primary" href="<?php echo base_url($controllername."/"."Xembiennhan"."/".$info["id"]); ?>" target="_blank">Xem trước</a>
-                        <a class="btn btn-danger" href=" <?php echo base_url($controllername.'/changestatus/'.$info['id']); ?>">Xác nhận</a>  
+                        <a class="btn btn-danger" href=" <?php echo base_url($controllername.'/changestatus/'.$info['id']); ?>">Xác nhận</a>
                         <a class="btn btn-primary" href="<?php echo base_url($controllername); ?>">Quay lại</a>
-           
+
                     </div>
                 </form>
 
@@ -350,8 +350,8 @@
 				<div style="text-align: center" id="title">
 					<h1 class="modal-title">Yếu tố thành phần chi tiết</h1>
 				</div>
-                
-                <input type="text" style="display:none;" class="form-control" id="idmau1" placeholder="Nhập số bản kết quả" readonly>   
+
+                <input type="text" style="display:none;" class="form-control" id="idmau1" placeholder="Nhập số bản kết quả" readonly>
 			</div>
 			<div class="modal-body">
                 <div class="row">
@@ -366,15 +366,15 @@
                                             <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                                          <?php } ?>
                                         </select>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-xs-4">
-                              
+
                                 <div class="form-group">
                                     <label>Chỉ tiêu mẫu</label>
                                     <select name="chitieumau" id="chitieumau" class="form-control select2" style="width: 100%;">
-                                     
+
                                     </select>
                                 </div>
                             </div>
@@ -426,7 +426,7 @@
                                         <th>Tên thử nghiệm</th>
                                         <th>Phương pháp thử</th>
                                         <th>Khối lượng mẫu yêu cầu</th>
-                         
+
                                       <!--<th>Giá</th>-->
                                         <th>Giá</th>
                                      </tr>
@@ -453,3 +453,19 @@
 		</div>
 	</div>
 </div>
+
+<script>
+function tinhTien() {
+
+	console.log($("#sotien").val());
+	var tienPhi = $("#sotien").val();
+	var traTruoc = $("#tratruoc").val();
+	if(traTruoc > tienPhi){
+		alert("tiền trả trước ít hơn tiền phí");
+	}else{
+		var tien = tienPhi - traTruoc;
+		$("#sum").val(tien);
+	}
+
+}
+</script>

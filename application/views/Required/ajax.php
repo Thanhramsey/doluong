@@ -14,35 +14,35 @@
                 ajaxlist(page_url=false);
                 event.preventDefault();
             });
-            
+
             /*-- Reset Search--*/
             $(document).on('click', "#resetBtn", function(event) {
                 $("#search_key").val('');
                 ajaxlist(page_url=false);
                 event.preventDefault();
             });
-            
+
             /*-- Page click --*/
             $(document).on('click', ".pagination li a", function(event) {
                 var page_url = $(this).attr('href');
                 ajaxlist(page_url);
                 event.preventDefault();
             });
-            
+
             /*-- create function ajaxlist --*/
             function ajaxlist(page_url = false)
             {
                 var search_name = $("#name").val();
                 var search_id = $("#id").val();
                 var search_mst = $("#mst").val();
-           
-                var dataString = { name:search_name, id:search_id,mst:search_mst}; 
+
+                var dataString = { name:search_name, id:search_id,mst:search_mst};
                 var base_url = '<?php echo site_url('Required/index_ajax/') ?>';
-                
+
                 if(page_url == false) {
                     var page_url = base_url;
                 }
-                
+
                 $.ajax({
                 type: "POST",
                 url: page_url,
@@ -52,7 +52,7 @@
                     $("#ajaxContent").html(response);
                 }
                 });
-            } 
+            }
 
 
       });
@@ -68,19 +68,19 @@ var dsmauchitieu = [];
             autoclose: true,
             format: 'dd/mm/yyyy',
       });
-		$('.select2').select2();   
+		$('.select2').select2();
         $('#chitieumau').on('change', function () {
             $('#typechitieu').val($('select#chitieumau option:selected').html().trim());
 
-        });        
+        });
        $('#typechitieu').on('change', function () {
             LoaddetailChitieu(this.value);
-        });     
+        });
 
 });
 var maso=parseInt($('#stt').val());
 function Addmau(id) {
-   
+
         var name = $('#name').val();
         var method = $('#method').val();
         var macode = $('#macode').val();
@@ -93,13 +93,13 @@ function Addmau(id) {
             data: {id: id, name: name,macode:macode, method:method, statusmau:statusmau, massmau:massmau,stt:stt },
             success: function(data)
                 {
-                     
+
                       var optObj = JSON.parse(data);
                       SetListBienLai01(optObj)
                 }
          });
       //  SetListBienLai01();
-    
+
 }
 
 function LoadChitieu(id) {
@@ -120,7 +120,7 @@ function LoadChitieu(id) {
                 }
          });
       //  SetListBienLai01();
-    
+
 }
 
 function SetListBienLai01(listchitietphi) {
@@ -129,9 +129,9 @@ function SetListBienLai01(listchitietphi) {
     var tongtienchitieu = 0;
     //console.log(datasettablebl);
     for (i = 0; i < listchitietphi.length; i++) {
-     
+
         html += "<tr>";
-  
+
         html += "<td>" + stt + "</td>";
         html += "<td><input class='form-control' type='text' name='phi' id='name"+ listchitietphi[i]["id"] + "' value='" + listchitietphi[i]["name"]+"' placeholder='Nhập tên mẫu'/></td>";
         html += "<td id='phi"+listchitietphi[i]["id"]+"'>" + listchitietphi[i]["chitieu"] + "</td>";
@@ -215,9 +215,9 @@ function LoaddetailChitieu(id) {
                  var optObj = JSON.parse(data);
                  for (i = 0; i < optObj.length; i++) {
                     html += "<option value=" +  optObj[i]["id"] + ">" +  optObj[i]["name"]+"</option>";
-                  
+
                 }
-            
+
                $('#chitieumau').select2('destroy').html(html).prop('disable', true).select2();
               // SetListChitieu(optObj);
            }
@@ -238,7 +238,6 @@ function bosungchitieu(){
                 data: {id: id,chitieu:chitieu, chitieumau:chitieumau },
                 success: function(data)
                     {
-                        
                         var optObj = JSON.parse(data);
                         SetListChitieu(optObj);
                     }
@@ -257,13 +256,13 @@ function luuchitieumau(){
                 type    : 'POST',
                 data: {tenmau: tenmaucosanchitieu, dschitiet:JSON.stringify(dsmauchitieu)},
                 success: function(data)
-                    {           
+                    {
                         html="";
                         var optObj = JSON.parse(data);
                         for (i = 0; i < optObj.length; i++) {
                             html += "<option value=" +  optObj[i]["id"] + ">" +  optObj[i]["name"]+"</option>";
-                                    
-                        }       
+
+                        }
                         $('#mauthuongdung').select2('destroy').html(html).prop('disable', true).select2();
                     }
         });
@@ -285,7 +284,7 @@ function loaddsmaucosan(){
                       SetListChitieu(optObj);
                 }
         });
-   
+
 }
 function DeleteChitieu(id,idmau1){
     idmau = idmau1;
@@ -311,7 +310,6 @@ function SetListChitieu(listchitietphi) {
     for (i = 0; i < listchitietphi.length; i++) {
         var thanhtien = 0;
         html += "<tr>";
-  
         html += "<td>" + stt + "</td>";
         html += "<td>"+ "<sup>"+listchitietphi[i]["note"]+"</sup>" + listchitietphi[i]["name"]+ "</td>";
         listchitiet += "<li>"+"<sup>"+listchitietphi[i]["note"]+"</sup>"+ listchitietphi[i]["name"]+ "</li>";
@@ -347,7 +345,10 @@ function SetListChitieu(listchitietphi) {
     html += "<td style='text-align: left;'></td>";
     html +="</tr>"
     $("#NoiDungChitieu").html(html);
-    console.log(dsmauchitieu);
+    // console.log(dsmauchitieu);
+	$("#sotien").val(tongtienchitieu);
+	$("#method_sotienchu").val(convertCharacterNumber.doc(tongtienchitieu));
+
     $("#sum"+idmau).empty();
    $("#sum"+idmau).append(tongtienchitieu);
     $("#phi"+idmau).html(listchitiet);
